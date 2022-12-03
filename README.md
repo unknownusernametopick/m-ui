@@ -1,4 +1,4 @@
-# x-ui
+# m-ui
 > **Disclaimer: This project is only for personal learning and communication, please do not use it for illegal purposes, please do not use it in a production environment**
 
 
@@ -7,11 +7,11 @@ xray panel supporting multi-protocol, **Multi-lang (English,Chinese)**, **IP Res
 | Features        | Enable?           |
 | ------------- |:-------------:|
 | Multi-lang | :heavy_check_mark: |
-| [IP Restriction](https://github.com/hossinasaadi/x-ui/#enable-ip-restrictions-per-inbound) | :heavy_check_mark: |
-| [Inbound Multi User](https://github.com/hossinasaadi/x-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
-| [Multi User Traffic & expire day](https://github.com/hossinasaadi/x-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
-| [REST API](https://github.com/hossinasaadi/x-ui/pull/51) | :heavy_check_mark: |
-| [Telegram BOT](https://github.com/hossinasaadi/x-ui/pull/110) | :heavy_check_mark: |
+| [IP Restriction](https://github.com/unknownusernametopick/m-ui/#enable-ip-restrictions-per-inbound) | :heavy_check_mark: |
+| [Inbound Multi User](https://github.com/unknownusernametopick/m-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
+| [Multi User Traffic & expire day](https://github.com/unknownusernametopick/m-ui/#enable-multi-user-traffic--exprire-day) | :heavy_check_mark: |
+| [REST API](https://github.com/unknownusernametopick/m-ui/pull/51) | :heavy_check_mark: |
+| [Telegram BOT](https://github.com/unknownusernametopick/m-ui/pull/110) | :heavy_check_mark: |
 
 **If you think this project is helpful to you, you may wish to give a** :star2: 
 
@@ -91,32 +91,32 @@ find this in config :
 # Install & Upgrade
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/hossinasaadi/x-ui/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/unknownusernametopick/m-ui/master/install.sh)
 ```
 
 ## Manual install & upgrade
 
-1. First download the latest compressed package from https://github.com/hossinasaadi/x-ui/releases , generally choose Architecture `amd64`
+1. First download the latest compressed package from https://github.com/unknownusernametopick/m-ui/releases , generally choose Architecture `amd64`
 2. Then upload the compressed package to the server's `/root/` directory and `root` rootlog in to the server with user
 
 > If your server cpu architecture is not `amd64` replace another architecture
 
 ```
 cd /root/
-rm x-ui/ /usr/local/x-ui/ /usr/bin/x-ui -rf
-tar zxvf x-ui-linux-amd64.tar.gz
-chmod +x x-ui/x-ui x-ui/bin/xray-linux-* x-ui/x-ui.sh
-cp x-ui/x-ui.sh /usr/bin/x-ui
-cp -f x-ui/x-ui.service /etc/systemd/system/
-mv x-ui/ /usr/local/
+rm m-ui/ /usr/local/m-ui/ /usr/bin/m-ui -rf
+tar zxvf m-ui-linux-amd64.tar.gz
+chmod +x m-ui/m-ui m-ui/bin/xray-linux-* m-ui/m-ui.sh
+cp m-ui/m-ui.sh /usr/bin/m-ui
+cp -f m-ui/m-ui.service /etc/systemd/system/
+mv m-ui/ /usr/local/
 systemctl daemon-reload
-systemctl enable x-ui
-systemctl restart x-ui
+systemctl enable m-ui
+systemctl restart m-ui
 ```
 
 ## Install using docker
 
-> This docker tutorial and docker image are provided by [hossinasaadi](https://github.com/hossinasaadi)
+> This docker tutorial and docker image are provided by [unknownusernametopick](https://github.com/unknownusernametopick)
 
 1. install docker
 
@@ -124,21 +124,21 @@ systemctl restart x-ui
 curl -fsSL https://get.docker.com | sh
 ```
 
-2. install x-ui
+2. install m-ui
 
 ```shell
-mkdir x-ui && cd x-ui
+mkdir m-ui && cd m-ui
 docker run -itd --network=host \
-    -v $PWD/db/:/etc/x-ui/ \
+    -v $PWD/db/:/etc/m-ui/ \
     -v $PWD/cert/:/root/cert/ \
-    --name x-ui --restart=unless-stopped \
-    hossinasaadi/x-ui:latest
+    --name m-ui --restart=unless-stopped \
+    unknownusernametopick/m-ui:latest
 ```
 
 > Build your own image
 
 ```shell
-docker build -t x-ui .
+docker build -t m-ui .
 ```
 
 ## SSL certificate application
@@ -169,7 +169,7 @@ Precautions:
 
 > This feature and tutorial are provided by [FranzKafkaYu](https://github.com/FranzKafkaYu)
 
-X-UI supports daily traffic notification, panel login reminder and other functions through the Tg robot. To use the Tg robot, you need to apply for the specific application tutorial. You can refer to the [blog](https://coderfan.net/how-to-use-telegram-bot-to-alarm-you-when-someone-login-into-your-vps.html)
+M-UI supports daily traffic notification, panel login reminder and other functions through the Tg robot. To use the Tg robot, you need to apply for the specific application tutorial. You can refer to the [blog](https://coderfan.net/how-to-use-telegram-bot-to-alarm-you-when-someone-login-into-your-vps.html)
 Set the robot-related parameters in the panel background, including:
 
 - Tg Robot Token
@@ -203,14 +203,14 @@ More features are planned...
 
 ## Migrating from v2-ui
 
-First install the latest version of x-ui on the server where v2-ui is installed, and then use the following command to migrate, which will migrate the native v2-ui `All inbound account data` to x-ui，`Panel settings and username passwords are not migrated`
+First install the latest version of m-ui on the server where v2-ui is installed, and then use the following command to migrate, which will migrate the native v2-ui `All inbound account data` to m-ui，`Panel settings and username passwords are not migrated`
 
-> Please `Close v2-ui` and `restart x-ui`, otherwise the inbound of v2-ui will cause a `port conflict with the inbound of x-ui`
+> Please `Close v2-ui` and `restart m-ui`, otherwise the inbound of v2-ui will cause a `port conflict with the inbound of m-ui`
 
 ```
-x-ui v2-ui
+m-ui v2-ui
 ```
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/hossinasaadi/x-ui.svg)](https://starchart.cc/hossinasaadi/x-ui)
+[![Stargazers over time](https://starchart.cc/unknownusernametopick/m-ui.svg)](https://starchart.cc/unknownusernametopick/m-ui)
