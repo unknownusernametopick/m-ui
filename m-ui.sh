@@ -94,7 +94,7 @@ before_show_menu() {
 }
 
 install() {
-    bash <(curl -Ls https://raw.githubusercontent.com/hossinasaadi/x-ui/main/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/unknownusernametopick/m-ui/main/install.sh)
     if [[ $? == 0 ]]; then
         if [[ $# == 0 ]]; then
             start
@@ -113,7 +113,7 @@ update() {
         fi
         return 0
     fi
-    bash <(curl -Ls https://raw.githubusercontent.com/hossinasaadi/x-ui/main/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/unknownusernametopick/m-ui/main/install.sh)
     if [[ $? == 0 ]]; then
         LOGI "Update is complete, Panel has automatically restarted "
         exit 0
@@ -128,16 +128,16 @@ uninstall() {
         fi
         return 0
     fi
-    systemctl stop x-ui
-    systemctl disable x-ui
-    rm /etc/systemd/system/x-ui.service -f
+    systemctl stop m-ui
+    systemctl disable m-ui
+    rm /etc/systemd/system/m-ui.service -f
     systemctl daemon-reload
     systemctl reset-failed
-    rm /etc/x-ui/ -rf
-    rm /usr/local/x-ui/ -rf
+    rm /etc/m-ui/ -rf
+    rm /usr/local/m-ui/ -rf
 
     echo ""
-    echo -e "Uninstalled Successfully，If you want to remove this script，then after exiting the script run ${green}rm /usr/bin/x-ui -f${plain} to delete it."
+    echo -e "Uninstalled Successfully，If you want to remove this script，then after exiting the script run ${green}rm /usr/bin/m-ui -f${plain} to delete it."
     echo ""
 
     if [[ $# == 0 ]]; then
@@ -153,7 +153,7 @@ reset_user() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -username admin -password admin
+    /usr/local/m-ui/m-ui setting -username admin -password admin
     echo -e "Username and password have been reset to ${green}admin${plain}，Please restart the panel now."
     confirm_restart
 }
@@ -166,13 +166,13 @@ reset_config() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -reset
+    /usr/local/m-ui/m-ui setting -reset
     echo -e "All panel settings have been reset to default，Please restart the panel now，and use the default ${green}54321${plain} Port to Access the web Panel"
     confirm_restart
 }
 
 check_config() {
-    info=$(/usr/local/x-ui/x-ui setting -show true)
+    info=$(/usr/local/m-ui/m-ui setting -show true)
     if [[ $? != 0 ]]; then
         LOGE "get current settings error,please check logs"
         show_menu
@@ -186,7 +186,7 @@ set_port() {
         LOGD "Cancelled"
         before_show_menu
     else
-        /usr/local/x-ui/x-ui setting -port ${port}
+        /usr/local/m-ui/m-ui setting -port ${port}
         echo -e "The port is set，Please restart the panel now，and use the new port ${green}${port}${plain} to access web panel"
         confirm_restart
     fi
@@ -198,11 +198,11 @@ start() {
         echo ""
         LOGI "Panel is running，No need to start again，If you need to restart, please select restart"
     else
-        systemctl start x-ui
+        systemctl start m-ui
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
-            LOGI "x-ui Started Successfully"
+            LOGI "m-ui Started Successfully"
         else
             LOGE "panel Failed to start，Probably because it takes longer than two seconds to start，Please check the log information later"
         fi
@@ -219,11 +219,11 @@ stop() {
         echo ""
         LOGI "Panel stopped，No need to stop again!"
     else
-        systemctl stop x-ui
+        systemctl stop m-ui
         sleep 2
         check_status
         if [[ $? == 1 ]]; then
-            LOGI "x-ui and xray stopped successfully"
+            LOGI "m-ui and xray stopped successfully"
         else
             LOGE "Panel stop failed，Probably because the stop time exceeds two seconds，Please check the log information later"
         fi
@@ -235,11 +235,11 @@ stop() {
 }
 
 restart() {
-    systemctl restart x-ui
+    systemctl restart m-ui
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
-        LOGI "x-ui and xray Restarted successfully"
+        LOGI "m-ui and xray Restarted successfully"
     else
         LOGE "Panel restart failed，Probably because it takes longer than two seconds to start，Please check the log information later"
     fi
@@ -249,18 +249,18 @@ restart() {
 }
 
 status() {
-    systemctl status x-ui -l
+    systemctl status m-ui -l
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
 }
 
 enable() {
-    systemctl enable x-ui
+    systemctl enable m-ui
     if [[ $? == 0 ]]; then
-        LOGI "x-ui Set to boot automatically on startup successfully"
+        LOGI "m-ui Set to boot automatically on startup successfully"
     else
-        LOGE "x-ui Failed to set Autostart"
+        LOGE "m-ui Failed to set Autostart"
     fi
 
     if [[ $# == 0 ]]; then
@@ -269,11 +269,11 @@ enable() {
 }
 
 disable() {
-    systemctl disable x-ui
+    systemctl disable m-ui
     if [[ $? == 0 ]]; then
-        LOGI "x-ui Autostart Cancelled successfully"
+        LOGI "m-ui Autostart Cancelled successfully"
     else
-        LOGE "x-ui Failed to cancel autostart"
+        LOGE "m-ui Failed to cancel autostart"
     fi
 
     if [[ $# == 0 ]]; then
@@ -282,14 +282,14 @@ disable() {
 }
 
 show_log() {
-    journalctl -u x-ui.service -e --no-pager -f
+    journalctl -u m-ui.service -e --no-pager -f
     if [[ $# == 0 ]]; then
         before_show_menu
     fi
 }
 
 migrate_v2_ui() {
-    /usr/local/x-ui/x-ui v2-ui
+    /usr/local/m-ui/m-ui v2-ui
 
     before_show_menu
 }
@@ -302,23 +302,23 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/x-ui -N --no-check-certificate https://github.com/hossinasaadi/x-ui/raw/main/x-ui.sh
+    wget -O /usr/bin/m-ui -N --no-check-certificate https://github.com/unknownusernametopick/m-ui/raw/main/m-ui.sh
     if [[ $? != 0 ]]; then
         echo ""
         LOGE "Failed to download script，Please check whether the machine can connect Github"
         before_show_menu
     else
-        chmod +x /usr/bin/x-ui
+        chmod +x /usr/bin/m-ui
         LOGI "Upgrade script succeeded，Please rerun the script" && exit 0
     fi
 }
 
 # 0: running, 1: not running, 2: not installed
 check_status() {
-    if [[ ! -f /etc/systemd/system/x-ui.service ]]; then
+    if [[ ! -f /etc/systemd/system/m-ui.service ]]; then
         return 2
     fi
-    temp=$(systemctl status x-ui | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+    temp=$(systemctl status m-ui | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
     if [[ x"${temp}" == x"running" ]]; then
         return 0
     else
@@ -327,7 +327,7 @@ check_status() {
 }
 
 check_enabled() {
-    temp=$(systemctl is-enabled x-ui)
+    temp=$(systemctl is-enabled m-ui)
     if [[ x"${temp}" == x"enabled" ]]; then
         return 0
     else
@@ -484,45 +484,45 @@ ssl_cert_issue() {
 }
 
 show_usage() {
-    echo "x-ui control menu usages: "
+    echo "m-ui control menu usages: "
     echo "------------------------------------------"
-    echo "x-ui              - Enter     Admin menu"
-    echo "x-ui start        - Start     x-ui"
-    echo "x-ui stop         - Stop      x-ui"
-    echo "x-ui restart      - Restart   x-ui"
-    echo "x-ui status       - Show      x-ui status"
-    echo "x-ui enable       - Enable    x-ui on system startup"
-    echo "x-ui disable      - Disable   x-ui on system startup"
-    echo "x-ui log          - Check     x-ui logs"
-    echo "x-ui v2-ui        - Migrate   v2-ui Account data to x-ui"
-    echo "x-ui update       - Update    x-ui"
-    echo "x-ui install      - Install   x-ui"
-    echo "x-ui uninstall    - Uninstall x-ui"
+    echo "m-ui              - Enter     Admin menu"
+    echo "m-ui start        - Start     m-ui"
+    echo "m-ui stop         - Stop      m-ui"
+    echo "m-ui restart      - Restart   m-ui"
+    echo "m-ui status       - Show      m-ui status"
+    echo "m-ui enable       - Enable    m-ui on system startup"
+    echo "m-ui disable      - Disable   m-ui on system startup"
+    echo "m-ui log          - Check     m-ui logs"
+    echo "m-ui v2-ui        - Migrate   v2-ui Account data to m-ui"
+    echo "m-ui update       - Update    m-ui"
+    echo "m-ui install      - Install   m-ui"
+    echo "m-ui uninstall    - Uninstall m-ui"
     echo "------------------------------------------"
 }
 
 show_menu() {
     echo -e "
-  ${green}x-ui Panel Management Script${plain}
+  ${green}m-ui Panel Management Script${plain}
   ${green}0.${plain} exit script
 ————————————————
-  ${green}1.${plain} Install x-ui
-  ${green}2.${plain} Update x-ui
-  ${green}3.${plain} Uninstall x-ui
+  ${green}1.${plain} Install m-ui
+  ${green}2.${plain} Update m-ui
+  ${green}3.${plain} Uninstall m-ui
 ————————————————
   ${green}4.${plain} Reset username and password
   ${green}5.${plain} Reset panel settings
   ${green}6.${plain} Set panel port
   ${green}7.${plain} View current panel settings
 ————————————————
-  ${green}8.${plain} Start x-ui
-  ${green}9.${plain} stop x-ui
-  ${green}10.${plain} Reboot x-ui
-  ${green}11.${plain} Check x-ui state
-  ${green}12.${plain} Check x-ui logs
+  ${green}8.${plain} Start m-ui
+  ${green}9.${plain} stop m-ui
+  ${green}10.${plain} Reboot m-ui
+  ${green}11.${plain} Check m-ui state
+  ${green}12.${plain} Check m-ui logs
 ————————————————
-  ${green}13.${plain} set x-ui Autostart
-  ${green}14.${plain} Cancel x-ui Autostart
+  ${green}13.${plain} set m-ui Autostart
+  ${green}14.${plain} Cancel m-ui Autostart
 ————————————————
   ${green}15.${plain} 一A key installation bbr (latest kernel)
   ${green}16.${plain} 一Apply for an SSL certificate with one click(acme script)

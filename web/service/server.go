@@ -17,9 +17,9 @@ import (
 	"os"
 	"runtime"
 	"time"
-	"x-ui/logger"
-	"x-ui/util/sys"
-	"x-ui/xray"
+	"m-ui/logger"
+	"m-ui/util/sys"
+	"m-ui/xray"
 )
 
 type ProcessState string
@@ -171,7 +171,7 @@ func (s *ServerService) GetStatus(lastStatus *Status) *Status {
 }
 
 func (s *ServerService) GetXrayVersions() ([]string, error) {
-	url := "https://api.github.com/repos/hossinasaadi/Xray-core/releases"
+	url := "https://api.github.com/repos/unknownusernametopick/Xray-core/releases"
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -214,7 +214,7 @@ func (s *ServerService) downloadXRay(version string) (string, error) {
 	}
 
 	fileName := fmt.Sprintf("Xray-%s-%s.zip", osName, arch)
-	url := fmt.Sprintf("https://github.com/hossinasaadi/Xray-core/releases/download/%s/%s", version, fileName)
+	url := fmt.Sprintf("https://github.com/unknownusernametopick/Xray-core/releases/download/%s/%s", version, fileName)
 	resp, err := http.Get(url)
 	if err != nil {
 		return "", err

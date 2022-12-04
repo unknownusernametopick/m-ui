@@ -28,12 +28,12 @@ body:
   - type: textarea
     id: version
     attributes:
-      label: Version of x-ui
+      label: Version of m-ui
       value: |-
         <details>
 
         ```console
-        $ x-ui version
+        $ m-ui version
         # Paste output here
         ```
 
@@ -44,7 +44,7 @@ body:
   - type: textarea
     id: log
     attributes:
-      label: x-ui log or xray log
+      label: m-ui log or xray log
       value: |-
         <details>
 

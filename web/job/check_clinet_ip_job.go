@@ -1,10 +1,10 @@
 package job
 
 import (
-	"x-ui/logger"
-	"x-ui/web/service"
-	"x-ui/database"
-	"x-ui/database/model"
+	"m-ui/logger"
+	"m-ui/web/service"
+	"m-ui/database"
+	"m-ui/database/model"
     "os"
  	ss "strings"
 	"regexp"

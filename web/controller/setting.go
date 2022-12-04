@@ -4,9 +4,9 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"time"
-	"x-ui/web/entity"
-	"x-ui/web/service"
-	"x-ui/web/session"
+	"m-ui/web/entity"
+	"m-ui/web/service"
+	"m-ui/web/session"
 )
 
 type updateUserForm struct {

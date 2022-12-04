@@ -15,7 +15,7 @@ func InitLogger(level logging.Level) {
 	format := logging.MustStringFormatter(
 		`%{time:2006/01/02 15:04:05} %{level} - %{message}`,
 	)
-	newLogger := logging.MustGetLogger("x-ui")
+	newLogger := logging.MustGetLogger("m-ui")
 	backend := logging.NewLogBackend(os.Stderr, "", 0)
 	backendFormatter := logging.NewBackendFormatter(backend, format)
 	backendLeveled := logging.AddModuleLevel(backendFormatter)

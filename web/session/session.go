@@ -4,7 +4,7 @@ import (
 	"encoding/gob"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"x-ui/database/model"
+	"m-ui/database/model"
 )
 
 const (

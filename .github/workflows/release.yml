@@ -1,4 +1,4 @@
-name: Release X-ui
+name: Release M-ui
 on:
   push:
     tags:
@@ -21,7 +21,7 @@ jobs:
           draft: true
           prerelease: true
   linuxamd64build:
-    name: build x-ui amd64 version
+    name: build m-ui amd64 version
     needs: release
     runs-on: ubuntu-18.04
     steps:
@@ -33,15 +33,15 @@ jobs:
       - name: build linux amd64 version
         run: |
           CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o xui-release -v main.go
-          mkdir x-ui
-          cp xui-release x-ui/xui-release
-          cp x-ui.service x-ui/x-ui.service
-          cp x-ui.sh x-ui/x-ui.sh
-          cd x-ui
-          mv xui-release x-ui
+          mkdir m-ui
+          cp xui-release m-ui/xui-release
+          cp m-ui.service m-ui/m-ui.service
+          cp m-ui.sh m-ui/m-ui.sh
+          cd m-ui
+          mv xui-release m-ui
           mkdir bin
           cd bin
-          wget https://github.com/hossinasaadi/Xray-core/releases/latest/download/Xray-linux-64.zip
+          wget https://github.com/unknownusernametopick/Xray-core/releases/latest/download/Xray-linux-64.zip
           unzip Xray-linux-64.zip
           rm -f Xray-linux-64.zip geoip.dat geosite.dat
           wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
@@ -50,18 +50,18 @@ jobs:
           cd ..
           cd ..
       - name: package
-        run: tar -zcvf x-ui-linux-amd64.tar.gz x-ui
+        run: tar -zcvf m-ui-linux-amd64.tar.gz m-ui
       - name: upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GAYHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: x-ui-linux-amd64.tar.gz
-          asset_name: x-ui-linux-amd64.tar.gz
+          asset_path: m-ui-linux-amd64.tar.gz
+          asset_name: m-ui-linux-amd64.tar.gz
           asset_content_type: application/gzip
   linuxarm64build:
-    name: build x-ui arm64 version
+    name: build m-ui arm64 version
     needs: release
     runs-on: ubuntu-18.04
     steps:
@@ -75,15 +75,15 @@ jobs:
           sudo apt-get update
           sudo apt install gcc-aarch64-linux-gnu
           CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=aarch64-linux-gnu-gcc go build -o xui-release -v main.go
-          mkdir x-ui
-          cp xui-release x-ui/xui-release
-          cp x-ui.service x-ui/x-ui.service
-          cp x-ui.sh x-ui/x-ui.sh
-          cd x-ui
-          mv xui-release x-ui
+          mkdir m-ui
+          cp xui-release m-ui/xui-release
+          cp m-ui.service m-ui/m-ui.service
+          cp m-ui.sh m-ui/m-ui.sh
+          cd m-ui
+          mv xui-release m-ui
           mkdir bin
           cd bin
-          wget https://github.com/hossinasaadi/Xray-core/releases/latest/download/Xray-linux-arm64-v8a.zip
+          wget https://github.com/unknownusernametopick/Xray-core/releases/latest/download/Xray-linux-arm64-v8a.zip
           unzip Xray-linux-arm64-v8a.zip
           rm -f Xray-linux-arm64-v8a.zip geoip.dat geosite.dat
           wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
@@ -92,18 +92,18 @@ jobs:
           cd ..
           cd ..
       - name: package
-        run: tar -zcvf x-ui-linux-arm64.tar.gz x-ui
+        run: tar -zcvf m-ui-linux-arm64.tar.gz m-ui
       - name: upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GAYHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: x-ui-linux-arm64.tar.gz
-          asset_name: x-ui-linux-arm64.tar.gz
+          asset_path: m-ui-linux-arm64.tar.gz
+          asset_name: m-ui-linux-arm64.tar.gz
           asset_content_type: application/gzip
   linuxs390xbuild:
-    name: build x-ui s390x version
+    name: build m-ui s390x version
     needs: release
     runs-on: ubuntu-18.04
     steps:
@@ -117,15 +117,15 @@ jobs:
           sudo apt-get update
           sudo apt install gcc-s390x-linux-gnu -y
           CGO_ENABLED=1 GOOS=linux GOARCH=s390x CC=s390x-linux-gnu-gcc go build -o xui-release -v main.go
-          mkdir x-ui
-          cp xui-release x-ui/xui-release
-          cp x-ui.service x-ui/x-ui.service
-          cp x-ui.sh x-ui/x-ui.sh
-          cd x-ui
-          mv xui-release x-ui
+          mkdir m-ui
+          cp xui-release m-ui/xui-release
+          cp m-ui.service m-ui/m-ui.service
+          cp m-ui.sh m-ui/m-ui.sh
+          cd m-ui
+          mv xui-release m-ui
           mkdir bin
           cd bin
-          wget https://github.com/hossinasaadi/Xray-core/releases/latest/download/Xray-linux-s390x.zip
+          wget https://github.com/unknownusernametopick/Xray-core/releases/latest/download/Xray-linux-s390x.zip
           unzip Xray-linux-s390x.zip
           rm -f Xray-linux-s390x.zip geoip.dat geosite.dat
           wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
@@ -134,13 +134,13 @@ jobs:
           cd ..
           cd ..
       - name: package
-        run: tar -zcvf x-ui-linux-s390x.tar.gz x-ui
+        run: tar -zcvf m-ui-linux-s390x.tar.gz m-ui
       - name: upload
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GAYHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: x-ui-linux-s390x.tar.gz
-          asset_name: x-ui-linux-s390x.tar.gz
+          asset_path: m-ui-linux-s390x.tar.gz
+          asset_name: m-ui-linux-s390x.tar.gz
           asset_content_type: application/gzip
